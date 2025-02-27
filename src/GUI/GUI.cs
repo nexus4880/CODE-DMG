@@ -27,6 +27,17 @@ class GUI {
             Raylib.ClearBackground(Color.DarkGray);
             rlImGui.Begin();
 
+            if (Raylib.IsFileDropped()) {
+                string[] files = Raylib.GetDroppedFiles();
+                foreach (string file in files) {
+                    FileInfo fileInfo = new FileInfo(file);
+                    if (fileInfo.Extension == ".gb") {
+                        Helper.rom = file;
+                        insertingRom = true;
+                    }
+                }
+            }
+
             if (insertingRom) {
                 dmg = new DMG(Helper.rom, Helper.bootrom);
                 debug = new Debug(dmg);
