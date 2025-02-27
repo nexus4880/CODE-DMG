@@ -1,3 +1,5 @@
+using System.Text;
+
 class MBC {
     //MBC is currently only experimental
     //MBC0/ROM Only should be good
@@ -106,17 +108,15 @@ class MBC {
     }
 
     public string GetTitle() {
-        byte[] titleBytes = new byte[16];
-        Array.Copy(rom, 0x0134, titleBytes, 0, 16);
-
-        string title = System.Text.Encoding.ASCII.GetString(titleBytes).TrimEnd(null);
-
-        if (title.Length > 16)
-        {
-            title = title.Substring(0, 16);
+        int titleStart = 0x0134;
+        int titleLength;
+        for (titleLength = 0; titleLength < 16; titleLength++) {
+            if (rom[titleStart + titleLength] == 0) {
+                break;
+            }
         }
-
-        return "Title: " + title;
+        string title = Encoding.ASCII.GetString(rom, titleStart, titleLength);
+        return title;
     }
 
     public string GetCartridgeType() {
