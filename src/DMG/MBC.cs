@@ -116,7 +116,7 @@ class MBC {
             }
         }
         string title = Encoding.ASCII.GetString(rom, titleStart, titleLength);
-        return title;
+        return $"Title: {title}";
     }
 
     public string GetCartridgeType() {
