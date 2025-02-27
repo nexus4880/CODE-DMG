@@ -110,10 +110,8 @@ class MBC {
     public string GetTitle() {
         int titleStart = 0x0134;
         int titleLength;
-        for (titleLength = 0; titleLength < 16; titleLength++)
-        {
-            if (rom[titleStart + titleLength] == 0)
-            {
+        for (titleLength = 0; titleLength < 16; titleLength++) {
+            if (rom[titleStart + titleLength] == 0) {
                 break;
             }
         }
